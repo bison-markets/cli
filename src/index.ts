@@ -312,4 +312,60 @@ program
     }
   });
 
+program
+  .command("history")
+  .description("View past fee claim withdrawals")
+  .option("--limit <number>", "Number of claims to show", "10")
+  .action(async (options: { limit: string }) => {
+    const env = getEnv();
+    const client = createClient(env);
+
+    try {
+      const limit = parseInt(options.limit, 10);
+      const { claims, pagination } = await client.getDevFeeClaimHistory({
+        limit,
+      });
+      const info = await client.getDevAccountInfo();
+
+      console.log(`\nFee Claim History (${env})\n`);
+      console.log(`Account: ${info.id}\n`);
+
+      if (claims.length === 0) {
+        console.log("No claims found.\n");
+        return;
+      }
+
+      const dateWidth = 16;
+      const amountWidth = 14;
+      const chainWidth = 10;
+
+      console.log(
+        `${"Date".padEnd(dateWidth)}${"Amount".padEnd(amountWidth)}${"Chain".padEnd(chainWidth)}Payout Address`,
+      );
+      console.log("─".repeat(54));
+
+      for (const claim of claims) {
+        const date = new Date(claim.claimedAt).toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+        const amount = formatUusdc(claim.amountUusdc);
+        const addr = `${claim.payoutAddress.slice(0, 6)}...${claim.payoutAddress.slice(-4)}`;
+
+        console.log(
+          `${date.padEnd(dateWidth)}${amount.padEnd(amountWidth)}${claim.chain.padEnd(chainWidth)}${addr}`,
+        );
+      }
+
+      if (pagination.hasMore) {
+        console.log(`\n... and more (use --limit to see more)`);
+      }
+      console.log();
+    } catch (error) {
+      console.error("Error:", error instanceof Error ? error.message : error);
+      process.exit(1);
+    }
+  });
+
 program.parse();
