@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { Command } from "commander";
 import { createInterface } from "readline";
 import { createWalletClient, createPublicClient, http, type Chain } from "viem";
