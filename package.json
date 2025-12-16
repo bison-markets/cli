@@ -40,9 +40,13 @@
     "prepublishOnly": "npm run build",
     "prepare": "husky"
   },
+  "lint-staged": {
+    "*.{ts,js,json,md}": "prettier --write"
+  },
   "devDependencies": {
     "@types/node": "^25.0.2",
     "husky": "^9.1.7",
+    "lint-staged": "^16.1.0",
     "prettier": "^3.7.4",
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
