@@ -4,6 +4,8 @@
 
 Developer CLI for managing your Bison Markets integration.
 
+[Documentation](https://docs.bison.markets/general/cli)
+
 ## Installation
 
 ```bash
