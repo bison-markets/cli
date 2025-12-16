@@ -117,3 +117,25 @@ Authorization:
   Signer:    0x...
   Signature: 0x...
 ```
+
+### `bison history`
+
+View past fee claim withdrawals.
+
+```bash
+$ bison history
+
+Fee Claim History (testnet)
+
+Account: abc123
+
+Date            Amount        Chain     Payout Address
+──────────────────────────────────────────────────────
+Dec 10, 2024    $87.30        base-sepolia  0x1234...5678
+Nov 28, 2024    $45.00        base-sepolia  0x1234...5678
+Nov 15, 2024    $120.50       base-sepolia  0x1234...5678
+```
+
+Options:
+
+- `--limit <number>` — Number of claims to show (default: 10)
