@@ -1,5 +1,7 @@
 # Bison CLI
 
+[![npm version](https://badge.fury.io/js/@bison-markets%2Fcli.svg)](https://badge.fury.io/js/@bison-markets%2Fcli)
+
 Developer CLI for managing your Bison Markets integration.
 
 ## Installation
