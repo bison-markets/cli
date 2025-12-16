@@ -52,7 +52,7 @@ function getEnv(): Environment {
   const environments = getEnvironments();
   const validEnvs = Object.keys(environments);
 
-  const envFlag = program.opts().env as string | undefined;
+  const envFlag = program.opts().network as string | undefined;
   const envVar = process.env.BISON_NETWORK;
   const env = envFlag ?? envVar ?? "testnet";
 
@@ -118,7 +118,7 @@ program
   .name("bison")
   .description("Bison developer CLI")
   .version(version)
-  .option("-e, --env <network>", "Network (testnet, mainnet)")
+  .option("-n, --network <network>", "Network (testnet, mainnet)")
   .option("-y, --yes", "Skip confirmation prompts");
 
 program

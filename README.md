@@ -15,23 +15,17 @@ The CLI requires two environment variables:
 ```bash
 export BISON_PRIVATE_KEY="0x..."   # Your dev account signer private key
 export BISON_ACCOUNT_ID="..."      # Your Bison dev account ID
-```
-
-Optional:
-
-```bash
 export BISON_NETWORK="testnet"     # Default network (testnet or mainnet)
-export BISON_LOCAL_ENV="http://..."  # Local API URL for development
 ```
 
 ## Commands
 
 ### Network Selection
 
-All commands accept `-e, --env <network>` to override the default network:
+All commands accept `-n, --network <network>` to override the default:
 
 ```bash
-bison info -e mainnet
+bison info -n mainnet
 ```
 
 Use `-y, --yes` to skip confirmation prompts.
