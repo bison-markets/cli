@@ -1,6 +1,6 @@
 {
   "name": "@bison-markets/cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Developer CLI for Bison",
   "keywords": [
     "prediction-markets",
