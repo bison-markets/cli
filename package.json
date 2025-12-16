@@ -1,0 +1,59 @@
+{
+  "name": "@bison-markets/cli",
+  "version": "0.1.0",
+  "description": "Developer CLI for Bison",
+  "keywords": [
+    "prediction-markets",
+    "kalshi",
+    "evm",
+    "erc20"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/bison-markets/cli#readme",
+  "bugs": {
+    "url": "https://github.com/bison-markets/cli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bison-markets/cli.git"
+  },
+  "license": "AGPL-3.0-only",
+  "author": "",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "bin": {
+    "bison": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "cli:dev": "tsx src/index.ts",
+    "cli:built": "node dist/index.js",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.2",
+    "husky": "^9.1.7",
+    "prettier": "^3.7.4",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@bison-markets/sdk-ts": "^0.1.3",
+    "commander": "^14.0.2",
+    "viem": "^2.42.1"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
