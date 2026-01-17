@@ -3,7 +3,11 @@ import { createInterface } from "readline";
 import { createWalletClient, createPublicClient, http, type Chain } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { base, baseSepolia, bsc, bscTestnet, foundry } from "viem/chains";
-import { BisonClient, VAULT_ABI } from "@bison-markets/sdk-ts";
+import {
+  BisonClient,
+  VAULT_ABI,
+  formatUusdcDisplay,
+} from "@bison-markets/sdk-ts";
 
 const BASE_ENVIRONMENTS: Record<string, string> = {
   testnet: "https://testnet-api.bison.markets",
@@ -91,12 +95,18 @@ function createClient(env: Environment): BisonClient {
   });
 }
 
-function formatUusdc(uusdc: number): string {
-  return `$${(uusdc / 1_000_000).toFixed(2)}`;
+function formatUusdc(uusdc: bigint | string | number): string {
+  return `$${formatUusdcDisplay(uusdc, 2)}`;
 }
 
-function formatBps(bps: number): string {
-  return `${(bps / 100).toFixed(2)}%`;
+function formatBps(bps: bigint | string | number): string {
+  const value =
+    typeof bps === "bigint"
+      ? Number(bps)
+      : typeof bps === "string"
+        ? parseInt(bps, 10)
+        : bps;
+  return `${(value / 100).toFixed(2)}%`;
 }
 
 async function confirm(message: string): Promise<boolean> {
@@ -234,7 +244,7 @@ program
     try {
       const fees = await client.getDevAccountFees();
 
-      if (fees.unclaimedFeesUusdc === 0) {
+      if (BigInt(fees.unclaimedFeesUusdc) === 0n) {
         console.log("\nNo unclaimed fees available\n");
         return;
       }
